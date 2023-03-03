@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'
+    integrity='sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD' crossorigin='anonymous'>
+  <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Nibbler Click</title>
+</head>
+
+<style>
+  body.debug .container,
+  body.debug .container-fluid {
+    outline: 2px double blue;
+    outline-offset: -2px;
+  }
+
+  body.debug .row {
+    outline: 2px dashed red;
+    outline-offset: -2px;
+  }
+
+  body.debug [class*="col-"] {
+    outline: 2px dotted forestgreen;
+    outline-offset: -3px;
+  }
+</style>
+
+
+<body class="debug bg-space">
+  <!-- SECTION game title -->
+  <header class="container-fluid">
+    <section class="row">
+      <div class="col-12 text-light d-flex justify-content-center p-30">
+        <h6>Black Matter Miner</h6>
+      </div>
+    </section>
+
+  </header>
+
+  <main class="container-fluid">
+    <!-- SECTION lord nibbler -->
+    <section class="row">
+      <div class="col-12 d-flex justify-content-center p-3">
+        <img
+          src="https://th.bing.com/th/id/R.68c12432427e8812a7f507d93c7a3b9e?rik=AMTshzXlNKRDgg&riu=http%3a%2f%2fwww.geekycostumeideas.com%2fwp-content%2fuploads%2f2010%2f09%2fleela_nibbler_futurama.png&ehk=q9DJgL1h9oz6DiyjPr%2bH%2bNOSIgzCxOmcBwLdAVmPEGo%3d&risl=&pid=ImgRaw&r=0"
+          alt="lord-nibbler-img" class="h-img" onclick="mine()">
+      </div>
+    </section>
+
+    <!-- SECTION game upgrades/stats -->
+    <section class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-center text-light">
+          <p>stats</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="app.js"></script>
+</body>
+
+</html>
