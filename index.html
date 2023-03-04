@@ -31,9 +31,9 @@
 </style>
 
 
-<body class="debug bg-space">
+<body class="container debug bg-space">
   <!-- SECTION game title -->
-  <header class="container-fluid">
+  <header class="container">
     <section class="row">
       <div class="col-12 text-light d-flex justify-content-center p-30">
         <h6>Black Matter Miner</h6>
@@ -52,14 +52,87 @@
       </div>
     </section>
 
-    <!-- SECTION game upgrades/stats -->
+    <!-- SECTION black matter stats -->
     <section class="row">
       <div class="col-12">
         <div class="d-flex justify-content-center text-light">
-          <p>stats</p>
+          <p>Black Matter: <span id="black-matter">0</span> </p>
         </div>
       </div>
     </section>
+
+
+
+    <!-- SECTION upgrades more stats -->
+    <section class="row d-flex justify-content-around">
+
+      <div class="col-5 text-light m-1 p-2">
+        <div>
+          <!-- trying something -->
+          <h6 class="m-0">Click Upgrades</h6>
+          <div class="">
+
+            <div class="d-flex flex-row m-1">
+              <button class="btn btn-info" onclick="buyHam('ham')">50</button>
+              <p class="text-align-center m-1">Ham +5</p>
+            </div>
+
+            <div class="d-flex flex-row m-1">
+              <button class="btn btn-info" onclick="buyLeela('leela')">150</button>
+              <p class="text-align-center m-1">Leela Rubs +5</p>
+            </div>
+          </div>
+          <!-- trying something 2 -->
+          <p class="m-0">Auto Upgrades</p>
+          <div class="">
+
+            <div class="d-flex flex-row m-1">
+              <button class="btn btn-info">200</button>
+              <p class="text-align-center m-1">Digestion +10/3 sec</p>
+            </div>
+
+            <div class="d-flex flex-row m-1">
+              <button class="btn btn-info">300</button>
+              <p class="text-align-center m-1">Planet Express +10/3 sec</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- stats -->
+      <div class="col-5 text-light m-1 p-2">
+        <div>
+          <h6>Click Stats</h6>
+        </div>
+
+        <div>
+          <p><span id="ham-qty">0 </span> Ham</p>
+          <p><span id="ham-total">0</span>Total</p>
+        </div>
+
+        <div>
+          <p><span id="leela-qty">0 </span> Leela Rubs</p>
+          <p><span id="leela-total">0</span>Total</total>
+        </div>
+
+        <div>
+          <p><span>0 </span> Digestion</p>
+          <p><span>0</span>Total</p>
+
+        </div>
+
+        <div>
+          <p><span>0 </span> Planet Express</p>
+          <p><span>0</span>Total</p>
+
+        </div>
+
+      </div>
+    </section>
+
+
 
   </main>
 
