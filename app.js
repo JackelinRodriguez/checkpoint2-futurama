@@ -36,14 +36,19 @@ let clickUpgrades = [
 function updateBlackMatter(name) {
   console.log('update black matter');
   let blackMatterElem = document.getElementById('black-matter');
+  let drawClick = document.getElementById('leela-total');
+
   // @ts-ignore
-  blackMatterElem.innerText = lordNibblerTotal
+  blackMatterElem.innerText = lordNibblerTotal;
+  // @ts-ignore
+  drawClick.innerText = clickGrandTotal;
 }
 
 // NOTE in progress
 function drawUpgradeQty(name) {
   // update stat-qty on page 
-
+  // @ts-ignore
+  drawClick.innerText = clickGrandTotal;
 
 }
 
@@ -77,7 +82,8 @@ function clickModifyHam(name) {
     console.log('cost:', click.price);
   }
   // @ts-ignore
-  priceHam.innerText = click.price
+  priceHam.innerText = click.price;
+  updateBlackMatter()
 }
 
 function clickModifyLeela(name) {
@@ -97,7 +103,8 @@ function clickModifyLeela(name) {
     console.log('cost:', click.price);
   }
   // @ts-ignore
-  priceLeela.innerText = click.price
+  priceLeela.innerText = click.price;
+  updateBlackMatter()
 }
 
 
@@ -126,8 +133,6 @@ function buyHam(name) {
   // @ts-ignore
   drawQty.innerText = ham.quantity
   clickModifyHam(name)
-  drawUpgradeQty(name)
-  updateBlackMatter()
 }
 
 function buyLeela(name) {
@@ -147,7 +152,6 @@ function buyLeela(name) {
   // @ts-ignore
   drawQty.innerText = leela.quantity
   clickModifyLeela(name)
-  updateBlackMatter()
 }
 
 
