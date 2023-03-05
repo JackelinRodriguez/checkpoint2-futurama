@@ -3,13 +3,13 @@ console.log('we connected?');
 let autoUpgrades = [
   {
     name: 'digestion',
-    price: 20,
+    price: 200,
     quantity: 0,
     multiplier: 1
   },
   {
     name: 'planet express',
-    price: 20,
+    price: 300,
     quantity: 0,
     multiplier: 1
   }
@@ -18,15 +18,15 @@ let autoUpgrades = [
 let clickUpgrades = [
   {
     name: 'ham',
-    price: 5,
+    price: 20,
     quantity: 0,
-    multiplier: 2
+    multiplier: 5
   },
   {
     name: 'leela',
-    price: 10,
+    price: 150,
     quantity: 0,
-    multiplier: 4
+    multiplier: 10
   }
 ]
 
@@ -43,14 +43,7 @@ function updateBlackMatter(name) {
 // NOTE in progress
 function drawUpgradeQty(name) {
   // update stat-qty on page 
-  let drawQty = clickUpgrades.find(qty => qty.name == name);
-  let qtyElem = document.getElementById('ham-qty')
-  console.log('stats should be updating');
-  // @ts-ignore
-  if (drawQty.quantity > 0) {
-    // @ts-ignore
-    qtyElem.innerText = drawQty.quantity
-  }
+
 
 }
 
@@ -67,8 +60,9 @@ function mine() {
   updateBlackMatter()
 }
 
-function clickModify(name) {
+function clickModifyHam(name) {
   let click = clickUpgrades.find(click => click.name == name);
+  let priceHam = document.getElementById('ham-price')
   console.log('more bang for my click');
   // @ts-ignore
   if (click.quantity > 0) {
@@ -82,6 +76,28 @@ function clickModify(name) {
     // @ts-ignore
     console.log('cost:', click.price);
   }
+  // @ts-ignore
+  priceHam.innerText = click.price
+}
+
+function clickModifyLeela(name) {
+  let click = clickUpgrades.find(click => click.name == name);
+  let priceLeela = document.getElementById('leela-price')
+  console.log('more bang for my click');
+  // @ts-ignore
+  if (click.quantity > 0) {
+    // @ts-ignore
+    clickGrandTotal += click.multiplier;
+    // @ts-ignore
+  } if (click.quantity >= 1) {
+    console.log('it costs more');
+    // @ts-ignore
+    click.price *= 2
+    // @ts-ignore
+    console.log('cost:', click.price);
+  }
+  // @ts-ignore
+  priceLeela.innerText = click.price
 }
 
 
@@ -93,6 +109,7 @@ function buyHam(name) {
   // if yes, then increase lordNibblerTotal and the multiplier
   // also decrease the after purchase since it was purchased
   let ham = clickUpgrades.find(ham => ham.name == name)
+  let drawQty = document.getElementById('ham-qty')
   console.log(ham);
   // @ts-ignore
   if (lordNibblerTotal >= ham.price) {
@@ -106,7 +123,9 @@ function buyHam(name) {
   } else {
     window.alert('Hurry, mine more black matter!')
   }
-  clickModify(name)
+  // @ts-ignore
+  drawQty.innerText = ham.quantity
+  clickModifyHam(name)
   drawUpgradeQty(name)
   updateBlackMatter()
 }
@@ -114,6 +133,7 @@ function buyHam(name) {
 function buyLeela(name) {
   console.log("buying leela");
   let leela = clickUpgrades.find(leela => leela.name == name)
+  let drawQty = document.getElementById('leela-qty')
   console.log(leela);
   // @ts-ignore
   if (lordNibblerTotal >= leela.price) {
@@ -124,13 +144,50 @@ function buyLeela(name) {
   } else {
     window.alert('Nibbler we need more dark matter!')
   }
-  clickModify(name)
+  // @ts-ignore
+  drawQty.innerText = leela.quantity
+  clickModifyLeela(name)
   updateBlackMatter()
 }
 
 
 // SECTION interval auto upgrades
-// BOTH WORK JUST HATE HOW IT KEEPS GOING IN BACKGROUND
+// need price to subtract from the interval. maybe split into two functions
+
+function buyAutoDigestion(name) {
+  console.log("buying auto");
+  let digestion = clickUpgrades.find(digestion => digestion.name == name)
+  console.log(digestion);
+  // @ts-ignore
+  if (lordNibblerTotal >= digestion.price) {
+    // @ts-ignore
+    digestion.quantity++
+    // @ts-ignore
+    lordNibblerTotal -= digestion.price
+
+  } else {
+    window.alert('You need more dark matter!')
+  }
+  // clickModify(name)
+  updateBlackMatter()
+}
+
+
+function autoDigestion(name) {
+  let autoStat = autoUpgrades.find(auto => auto.name == name)
+  // @ts-ignore
+  if (lordNibblerTotal >= autoStat.price) {
+    // @ts-ignore
+    lordNibblerTotal -= autoStat.price;
+
+    // setInterval(() => {
+    //   console.log("digestion interval set");
+    //   lordNibblerTotal += 1;
+    //   updateBlackMatter()
+    // }, 3000)
+  }
+}
+
 
 // let digestionInterval = setInterval(() => {
 //   console.log("digestion interval set");
