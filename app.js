@@ -44,21 +44,27 @@ function updateBlackMatter(name) {
   // drawClick.innerText = clickGrandTotal;
 }
 
+function drawClickDarkMatter() {
+  let darkMatter = document.getElementById('click-total')
+  // @ts-ignore
+  darkMatter.innerText = darkMatterClick;
+
+}
 
 
 
 // SECTION math
 
 let lordNibblerTotal = 0;
-let clickGrandTotal = 0;
 let darkMatterClick = 0;
+
 let darkMatterDigest = 0;
 let darkMatterPlanet = 0;
 
 
 function mine() {
   lordNibblerTotal++
-  lordNibblerTotal += clickGrandTotal;
+  lordNibblerTotal += darkMatterClick;
   console.log("count:", lordNibblerTotal);
   updateBlackMatter()
 }
@@ -66,12 +72,10 @@ function mine() {
 function clickModifyHam(name) {
   let click = clickUpgrades.find(click => click.name == name);
   let priceHam = document.getElementById('ham-price')
-  let darkMatter = document.getElementById('ham-total')
+  // let darkMatter = document.getElementById('ham-total')
   console.log('more bang for my click');
   // @ts-ignore
   if (click.quantity > 0) {
-    // @ts-ignore
-    clickGrandTotal += click.multiplier;
     // @ts-ignore
     darkMatterClick += click.multiplier;
     // @ts-ignore
@@ -84,20 +88,19 @@ function clickModifyHam(name) {
   }
   // @ts-ignore
   priceHam.innerText = click.price;
-  // @ts-ignore
-  darkMatter.innerText = darkMatterClick;
+  // // @ts-ignore
+  // darkMatter.innerText = darkMatterClick;
+  drawClickDarkMatter()
   updateBlackMatter()
 }
 
 function clickModifyLeela(name) {
   let click = clickUpgrades.find(click => click.name == name);
   let priceLeela = document.getElementById('leela-price')
-  let darkMatter = document.getElementById('leela-total')
+  // let darkMatter = document.getElementById('leela-total')
   console.log('more bang for my click');
   // @ts-ignore
   if (click.quantity > 0) {
-    // @ts-ignore
-    clickGrandTotal += click.multiplier;
     // @ts-ignore
     darkMatterClick += click.multiplier;
     // @ts-ignore
@@ -110,9 +113,9 @@ function clickModifyLeela(name) {
   }
   // @ts-ignore
   priceLeela.innerText = click.price;
-  // @ts-ignore
-  darkMatter.innerText = darkMatterClick;
-
+  // // @ts-ignore
+  // darkMatter.innerText = darkMatterClick;
+  drawClickDarkMatter()
   updateBlackMatter()
 }
 
