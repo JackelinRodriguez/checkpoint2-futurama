@@ -58,7 +58,7 @@ function drawClickDarkMatter() {
 let lordNibblerTotal = 0;
 let darkMatterClick = 0;
 
-// let darkMatterAuto = 0;
+let darkMatterAuto = 0;
 
 
 function mine() {
@@ -170,25 +170,37 @@ function buyLeela(name) {
 // need price to subtract from the interval
 // add to quantity
 
-// NOTE not sure why when I try to do it outside it doesn't work
+// NOTE 
 // function drawDarkInterval() {
+//   let autoUpgrade = autoUpgrades.find(auto => auto.name);
+
 //   console.log('update total');
 //   let clickDigest = document.getElementById('digest-total')
 //   let clickPlanet = document.getElementById('planet-total')
+
+//   let digestQty = document.getElementById('digest-qty');
+//   let planetQty = document.getElementById('planet-qty');
+
+
 
 //   // @ts-ignore
 //   clickDigest.innerText = darkMatterAuto;
 //   // @ts-ignore
 //   clickPlanet.innerText = darkMatterAuto;
+//   // @ts-ignore
+//   digestQty.innerText = autoUpgrade.quantity;
+//   // @ts-ignore
+//   planetQty.innerText = autoUpgrade.quantity;
 // }
 
 
 // darkMatterAuto
 function stopIntervalDigest() {
-  let darkMatterAuto = 0;
+  // let darkMatterAuto = 0;
 
   console.log('dont start interval digest');
   let autoUpgrade = autoUpgrades.find(auto => auto.name);
+
   let digestQty = document.getElementById('digest-qty');
   let clickDigest = document.getElementById('digest-total')
 
@@ -196,7 +208,6 @@ function stopIntervalDigest() {
     console.log("digestion interval set");
     // @ts-ignore
     lordNibblerTotal += 2;
-    updateBlackMatter()
   }, 3000)
 
   // @ts-ignore
@@ -205,8 +216,6 @@ function stopIntervalDigest() {
   } else {
     // @ts-ignore
     lordNibblerTotal -= autoUpgrade.price;
-
-
     // @ts-ignore
     darkMatterAuto += autoUpgrade.multiplier;
     // @ts-ignore
@@ -227,7 +236,7 @@ function upgradeDigest() {
 }
 
 function stopIntervalPlanet() {
-  let darkMatterAuto = 0;
+  // let darkMatterAuto = 0;
 
   console.log('do not start interval planet');
   let autoUpgrade = autoUpgrades.find(auto => auto.name);
@@ -238,7 +247,6 @@ function stopIntervalPlanet() {
     console.log("digestion interval set");
     // @ts-ignore
     lordNibblerTotal += 10;
-    updateBlackMatter()
   }, 3000)
 
   // @ts-ignore
