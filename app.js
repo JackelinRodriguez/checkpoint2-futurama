@@ -58,7 +58,7 @@ function drawClickDarkMatter() {
 let lordNibblerTotal = 0;
 let darkMatterClick = 0;
 
-let darkMatterAuto = 0;
+// let darkMatterAuto = 0;
 
 
 function mine() {
@@ -171,29 +171,31 @@ function buyLeela(name) {
 // add to quantity
 
 // NOTE not sure why when I try to do it outside it doesn't work
-function drawDarkInterval() {
-  console.log('update total');
-  let clickDigest = document.getElementById('digest-total')
-  let clickPlanet = document.getElementById('planet-total')
+// function drawDarkInterval() {
+//   console.log('update total');
+//   let clickDigest = document.getElementById('digest-total')
+//   let clickPlanet = document.getElementById('planet-total')
 
-  // @ts-ignore
-  clickDigest.innerText = darkMatterAuto;
-  // @ts-ignore
-  clickPlanet.innerText = darkMatterAuto;
-}
+//   // @ts-ignore
+//   clickDigest.innerText = darkMatterAuto;
+//   // @ts-ignore
+//   clickPlanet.innerText = darkMatterAuto;
+// }
 
 
 // darkMatterAuto
-function stopIntervalDigest(name) {
+function stopIntervalDigest() {
+  let darkMatterAuto = 0;
+
   console.log('dont start interval digest');
-  let autoUpgrade = autoUpgrades.find(auto => auto.name == name);
+  let autoUpgrade = autoUpgrades.find(auto => auto.name);
   let digestQty = document.getElementById('digest-qty');
-  // let clickDigest = document.getElementById('digest-total')
+  let clickDigest = document.getElementById('digest-total')
 
   let digestionInterval = setInterval(() => {
     console.log("digestion interval set");
     // @ts-ignore
-    lordNibblerTotal += autoUpgrade.multiplier;
+    lordNibblerTotal += 2;
     updateBlackMatter()
   }, 3000)
 
@@ -215,8 +217,8 @@ function stopIntervalDigest(name) {
   // @ts-ignore
   digestQty.innerText = autoUpgrade.quantity;
   // @ts-ignore
-  // clickDigest.innerText = darkMatterAuto;
-  drawDarkInterval()
+  clickDigest.innerText = darkMatterAuto;
+  // drawDarkInterval()
   updateBlackMatter()
 }
 
@@ -224,16 +226,18 @@ function upgradeDigest() {
 
 }
 
-function stopIntervalPlanet(name) {
+function stopIntervalPlanet() {
+  let darkMatterAuto = 0;
+
   console.log('do not start interval planet');
-  let autoUpgrade = autoUpgrades.find(auto => auto.name == name);
+  let autoUpgrade = autoUpgrades.find(auto => auto.name);
   let planetQty = document.getElementById('planet-qty');
-  // let clickPlanet = document.getElementById('planet-total');
+  let clickPlanet = document.getElementById('planet-total');
 
   let planetInterval = setInterval(() => {
     console.log("digestion interval set");
     // @ts-ignore
-    lordNibblerTotal += autoUpgrade.multiplier;
+    lordNibblerTotal += 10;
     updateBlackMatter()
   }, 3000)
 
@@ -251,8 +255,8 @@ function stopIntervalPlanet(name) {
   // @ts-ignore
   planetQty.innerText = autoUpgrade.quantity;
   // @ts-ignore
-  // clickPlanet.innerText = darkMatterAuto;
-  drawDarkInterval()
+  clickPlanet.innerText = darkMatterAuto;
+  // drawDarkInterval()
   updateBlackMatter()
 }
 
