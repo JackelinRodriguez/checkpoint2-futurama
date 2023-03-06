@@ -5,13 +5,13 @@ let autoUpgrades = [
     name: 'digestion',
     price: 200,
     quantity: 0,
-    multiplier: 1
+    multiplier: 2
   },
   {
     name: 'planet express',
-    price: 300,
+    price: 500,
     quantity: 0,
-    multiplier: 2
+    multiplier: 10
   }
 ]
 
@@ -33,7 +33,7 @@ let clickUpgrades = [
 
 // SECTION draw
 
-function updateBlackMatter(name) {
+function updateBlackMatter() {
   console.log('update black matter');
   let blackMatterElem = document.getElementById('black-matter');
   // let drawClick = document.getElementById('leela-total');
@@ -177,16 +177,16 @@ function drawDarkInterval() {
   let clickPlanet = document.getElementById('planet-total')
 
   // @ts-ignore
-  clickDigest.innerText = darkMatterInterval;
+  clickDigest.innerText = darkMatterAuto;
   // @ts-ignore
-  clickPlanet.innerText = darkMatterInterval;
+  clickPlanet.innerText = darkMatterAuto;
 }
 
 
 // darkMatterAuto
-function stopIntervalDigest() {
+function stopIntervalDigest(name) {
   console.log('dont start interval digest');
-  let autoUpgrade = autoUpgrades.find(auto => auto.name);
+  let autoUpgrade = autoUpgrades.find(auto => auto.name == name);
   let digestQty = document.getElementById('digest-qty');
   // let clickDigest = document.getElementById('digest-total')
 
@@ -203,6 +203,8 @@ function stopIntervalDigest() {
   } else {
     // @ts-ignore
     lordNibblerTotal -= autoUpgrade.price;
+
+
     // @ts-ignore
     darkMatterAuto += autoUpgrade.multiplier;
     // @ts-ignore
@@ -218,9 +220,13 @@ function stopIntervalDigest() {
   updateBlackMatter()
 }
 
-function stopIntervalPlanet() {
+function upgradeDigest() {
+
+}
+
+function stopIntervalPlanet(name) {
   console.log('do not start interval planet');
-  let autoUpgrade = autoUpgrades.find(auto => auto.name);
+  let autoUpgrade = autoUpgrades.find(auto => auto.name == name);
   let planetQty = document.getElementById('planet-qty');
   // let clickPlanet = document.getElementById('planet-total');
 
