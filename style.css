@@ -3,10 +3,23 @@
   background-size: cover;
 }
 
+.font {
+  font-family: 'Staatliches', cursive;
+}
+
 .p-30 {
   padding: 30px;
 }
 
 .h-img {
-  height: 200px;
+  height: 260px;
+}
+
+.bg-card {
+  background: #23053f94;
+}
+
+.btn-teal {
+  background: #008080b3;
+  width: 80px;
 }
