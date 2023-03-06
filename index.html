@@ -87,12 +87,12 @@
           <div class="">
 
             <div class="d-flex flex-row m-1">
-              <button class="btn btn-info" onclick="buyAutoDigestion(name)">200</button>
+              <button class="btn btn-info" onclick="stopIntervalDigest()">200</button>
               <p class="text-align-center m-1">Digestion +10/3 sec</p>
             </div>
 
             <div class="d-flex flex-row m-1">
-              <button class="btn btn-info">300</button>
+              <button class="btn btn-info" onclick="stopIntervalPlanet()">300</button>
               <p class="text-align-center m-1">Planet Express +10/3 sec</p>
             </div>
 
@@ -118,13 +118,13 @@
         </div>
 
         <div>
-          <p><span>0 </span> Digestion</p>
+          <p><span id="digest-qty">0 </span> Digestion</p>
           <p><span>0</span> Total</p>
 
         </div>
 
         <div>
-          <p><span>0 </span> Planet Express</p>
+          <p><span id="planet-qty">0 </span> Planet Express</p>
           <p><span>0</span> Total</p>
 
         </div>
