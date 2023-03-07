@@ -36,19 +36,19 @@ let clickUpgrades = [
 function updateBlackMatter() {
   console.log('update black matter');
   let blackMatterElem = document.getElementById('black-matter');
-  // let drawClick = document.getElementById('leela-total');
-
   // @ts-ignore
   blackMatterElem.innerText = lordNibblerTotal;
-  // @ts-ignore
-  // drawClick.innerText = clickGrandTotal;
+
 }
 
 function drawClickDarkMatter() {
   let darkMatter = document.getElementById('click-total')
+  let drawAutoClick = document.getElementById('auto-total');
+
   // @ts-ignore
   darkMatter.innerText = darkMatterClick;
-
+  // @ts-ignore
+  drawAutoClick.innerText = darkMatterAuto;
 }
 
 
@@ -57,13 +57,15 @@ function drawClickDarkMatter() {
 
 let lordNibblerTotal = 0;
 let darkMatterClick = 0;
-
 let darkMatterAuto = 0;
+
+
 
 
 function mine() {
   lordNibblerTotal++
   lordNibblerTotal += darkMatterClick;
+  // lordNibblerTotal += darkMatterAuto;
   console.log("Dark Matter:", lordNibblerTotal);
   updateBlackMatter()
 }
@@ -118,8 +120,6 @@ function buyHam(name) {
     // @ts-ignore
     console.log('ham:', ham.quantity);
     // @ts-ignore
-  } if (ham.quantity >= 1) {
-    // @ts-ignore
     lordNibblerTotal -= ham.price;
     // @ts-ignore
     ham.price *= 2;
@@ -143,8 +143,6 @@ function buyLeela(name) {
     leela.quantity++
     // @ts-ignore
     console.log('leela', leela.quantity);
-    // @ts-ignore
-  } if (leela.quantity >= 1) {
     // @ts-ignore
     lordNibblerTotal -= leela.price;
     // @ts-ignore
@@ -172,15 +170,19 @@ function buyDigest(name) {
     // @ts-ignore
     digest.quantity++
     // @ts-ignore
-  } if (digest.quantity >= 1) {
+    console.log('digest', digest.quantity);
     // @ts-ignore
     lordNibblerTotal -= digest.price;
     // @ts-ignore
     digest.price *= 2;
+    // @ts-ignore
+    console.log('price auto digest:', digest.price);
   } else {
     window.alert('Get more dark matter to help Nibbler digest!')
   }
-  // NOTE here is the modify function to be made
+  // @ts-ignore
+  drawQty.innerText = digest.quantity
+  autoModifyDigest()
 }
 
 function buyPlanetExpress(name) {
@@ -192,71 +194,78 @@ function buyPlanetExpress(name) {
     // @ts-ignore
     planet.quantity++
     // @ts-ignore
-  } if (planet.quantity >= 1) {
-    // @ts-ignore
     lordNibblerTotal -= planet.price;
     // @ts-ignore
     planet.price *= 2;
   } else {
     window.alert('Good News! You need more dark matter.')
   }
-  // NOTE here is the modify function to be made
+  // @ts-ignore
+  drawQty.innerText = planet.quantity
+  autoModifyPlanet()
 }
 
-function autoModifyDigest(name) {
-  let auto = autoUpgrades.find(a => a.name == name);
+
+
+function autoModifyDigest() {
+  let darkMatterAuto = 0;
+  let auto = autoUpgrades.find(a => a.name);
   let priceAuto = document.getElementById('digest-price')
+
+
+  console.log("start interval");
+  // @ts-ignore
+  if (auto.quantity > 0) {
+    // @ts-ignore
+    darkMatterAuto += auto.multiplier
+  }
+  // @ts-ignore
+  // autoUpgrades.forEach(a => {
+  //   switch (a.name) {
+  //     case 'digestion':
+  //       darkMatterAuto += a.multiplier
+  //       break
+  //     case 'planet express':
+  //       darkMatterAuto += a.multiplier
+  //       break
+  //   }
+  // })
+
+  console.log('auto clicks:', darkMatterAuto);
+  lordNibblerTotal += darkMatterAuto;
+  // @ts-ignore
+  priceAuto.innerText = auto.price;
+  drawClickDarkMatter()
+  updateBlackMatter()
 }
 
+function autoModifyPlanet() {
+  let darkMatterAuto = 0;
+  let auto = autoUpgrades.find(a => a.name);
+  let priceAuto = document.getElementById('planet-price')
 
 
-
-
-
-
-
-
-
-// switch statment for interval??
-
-// NOTE
-// function drawDarkInterval() {
-//   let autoUpgrade = autoUpgrades.find(auto => auto.name);
-
-//   console.log('update total');
-//   let clickDigest = document.getElementById('digest-total')
-//   let clickPlanet = document.getElementById('planet-total')
-
-//   let digestQty = document.getElementById('digest-qty');
-//   let planetQty = document.getElementById('planet-qty');
-
-//   // @ts-ignore
-//   clickDigest.innerText = darkMatterAuto;
-//   // @ts-ignore
-//   clickPlanet.innerText = darkMatterAuto;
-//   // @ts-ignore
-//   digestQty.innerText = autoUpgrade.quantity;
-//   // @ts-ignore
-//   planetQty.innerText = autoUpgrade.quantity;
-// }
-
+  console.log("start interval");
+  // @ts-ignore
+  if (auto.quantity > 0) {
+    // @ts-ignore
+    darkMatterAuto += auto.multiplier
+  }
+  console.log('auto clicks:', darkMatterAuto);
+  lordNibblerTotal += darkMatterAuto;
+  // @ts-ignore
+  priceAuto.innerText = auto.price;
+  drawClickDarkMatter()
+  updateBlackMatter()
+}
 
 
 // FIXME move interval to run when the page loads
 // It can run all the time, and the logic to add or not add can be handled by the quantity of the upgrade
 
-// // SECTION intervals
-// let digestionInterval = setInterval(() => {
-//   console.log("digestion interval set");
-//   // @ts-ignore
-//   lordNibblerTotal += 2;
-// }, 3000)
-
-// let planetExpressInterval = setInterval(() => {
-//   console.log("planet express interval set");
-//   // @ts-ignore
-//   lordNibblerTotal += 10;
-// }, 3000)
 
 
+// SECTION interval
+// setInterval(autoModifyDigest, 3000)
+// setInterval(autoModifyPlanet, 3000)
 
