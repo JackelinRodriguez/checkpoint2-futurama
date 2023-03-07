@@ -65,7 +65,6 @@ let darkMatterAuto = 0;
 function mine() {
   lordNibblerTotal++
   lordNibblerTotal += darkMatterClick;
-  // lordNibblerTotal += darkMatterAuto;
   console.log("Dark Matter:", lordNibblerTotal);
   updateBlackMatter()
 }
@@ -196,7 +195,7 @@ function buyPlanetExpress(name) {
     // @ts-ignore
     lordNibblerTotal -= planet.price;
     // @ts-ignore
-    planet.price *= 2;
+    // planet.price *= 2;
   } else {
     window.alert('Good News! You need more dark matter.')
   }
@@ -206,35 +205,26 @@ function buyPlanetExpress(name) {
 }
 
 
-
+// SECTION modify autoclick upgrades
 function autoModifyDigest() {
-  let darkMatterAuto = 0;
-  let auto = autoUpgrades.find(a => a.name);
+  let autoDigest = autoUpgrades.find(a => a.name);
   let priceAuto = document.getElementById('digest-price')
 
 
   console.log("start interval");
   // @ts-ignore
-  if (auto.quantity > 0) {
+  if (autoDigest.quantity > 0) {
+    let darkMatterAuto = 0;
+
     // @ts-ignore
-    darkMatterAuto += auto.multiplier
+    darkMatterAuto += autoDigest.multiplier
   }
-  // @ts-ignore
-  // autoUpgrades.forEach(a => {
-  //   switch (a.name) {
-  //     case 'digestion':
-  //       darkMatterAuto += a.multiplier
-  //       break
-  //     case 'planet express':
-  //       darkMatterAuto += a.multiplier
-  //       break
-  //   }
-  // })
+
 
   console.log('auto clicks:', darkMatterAuto);
-  lordNibblerTotal += darkMatterAuto;
   // @ts-ignore
-  priceAuto.innerText = auto.price;
+  priceAuto.innerText = autoDigest.price;
+  lordNibblerTotal += darkMatterAuto;
   drawClickDarkMatter()
   updateBlackMatter()
 }
@@ -242,7 +232,7 @@ function autoModifyDigest() {
 function autoModifyPlanet() {
   let darkMatterAuto = 0;
   let auto = autoUpgrades.find(a => a.name);
-  let priceAuto = document.getElementById('planet-price')
+  // let priceAuto = document.getElementById('planet-price')
 
 
   console.log("start interval");
@@ -252,9 +242,9 @@ function autoModifyPlanet() {
     darkMatterAuto += auto.multiplier
   }
   console.log('auto clicks:', darkMatterAuto);
-  lordNibblerTotal += darkMatterAuto;
   // @ts-ignore
-  priceAuto.innerText = auto.price;
+  // priceAuto.innerText = auto.price;
+  lordNibblerTotal += darkMatterAuto;
   drawClickDarkMatter()
   updateBlackMatter()
 }
@@ -266,6 +256,6 @@ function autoModifyPlanet() {
 
 
 // SECTION interval
-// setInterval(autoModifyDigest, 3000)
-// setInterval(autoModifyPlanet, 3000)
+setInterval(autoModifyDigest, 3000)
+setInterval(autoModifyPlanet, 3000)
 
