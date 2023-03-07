@@ -64,59 +64,41 @@ let darkMatterAuto = 0;
 function mine() {
   lordNibblerTotal++
   lordNibblerTotal += darkMatterClick;
-  console.log("count:", lordNibblerTotal);
+  console.log("Dark Matter:", lordNibblerTotal);
   updateBlackMatter()
 }
 
 function clickModifyHam(name) {
   let click = clickUpgrades.find(click => click.name == name);
   let priceHam = document.getElementById('ham-price')
-  // let darkMatter = document.getElementById('ham-total')
   console.log('more bang for my click');
   // @ts-ignore
   if (click.quantity > 0) {
     // @ts-ignore
     darkMatterClick += click.multiplier;
-    // @ts-ignore
-  } if (click.quantity >= 1) {
-    console.log('it costs more');
-    // @ts-ignore
-    click.price *= 2
-    // @ts-ignore
-    console.log('cost:', click.price);
   }
   // @ts-ignore
   priceHam.innerText = click.price;
-  // // @ts-ignore
-  // darkMatter.innerText = darkMatterClick;
   drawClickDarkMatter()
   updateBlackMatter()
 }
 
 function clickModifyLeela(name) {
-  let click = clickUpgrades.find(click => click.name == name);
+  // add clicks from leela to lordNibbler
+  let click = clickUpgrades.find(c => c.name == name);
   let priceLeela = document.getElementById('leela-price')
-  // let darkMatter = document.getElementById('leela-total')
   console.log('more bang for my click');
   // @ts-ignore
   if (click.quantity > 0) {
     // @ts-ignore
-    darkMatterClick += click.multiplier;
-    // @ts-ignore
-  } if (click.quantity >= 1) {
-    console.log('it costs more');
-    // @ts-ignore
-    click.price *= 2
-    // @ts-ignore
-    console.log('cost:', click.price);
+    darkMatterClick += click.multiplier
   }
   // @ts-ignore
   priceLeela.innerText = click.price;
-  // // @ts-ignore
-  // darkMatter.innerText = darkMatterClick;
   drawClickDarkMatter()
   updateBlackMatter()
 }
+
 
 
 // SECTION click upgrades
@@ -124,7 +106,7 @@ function clickModifyLeela(name) {
 function buyHam(name) {
   console.log('buying ham');
   // check if we can afford
-  // if yes, then increase lordNibblerTotal and the multiplier
+  // if yes, then increase lordNibblerTotal and the price
   // also decrease the after purchase since it was purchased
   let ham = clickUpgrades.find(ham => ham.name == name)
   let drawQty = document.getElementById('ham-qty')
@@ -136,8 +118,13 @@ function buyHam(name) {
     // @ts-ignore
     console.log('ham:', ham.quantity);
     // @ts-ignore
+  } if (ham.quantity >= 1) {
+    // @ts-ignore
     lordNibblerTotal -= ham.price;
     // @ts-ignore
+    ham.price *= 2;
+    // @ts-ignore
+    console.log('it costs more', ham.price);
   } else {
     window.alert('Hurry, mine more black matter!')
   }
@@ -150,13 +137,20 @@ function buyLeela(name) {
   console.log("buying leela");
   let leela = clickUpgrades.find(leela => leela.name == name)
   let drawQty = document.getElementById('leela-qty')
-  console.log(leela);
   // @ts-ignore
   if (lordNibblerTotal >= leela.price) {
     // @ts-ignore
     leela.quantity++
     // @ts-ignore
-    lordNibblerTotal -= leela.price
+    console.log('leela', leela.quantity);
+    // @ts-ignore
+  } if (leela.quantity >= 1) {
+    // @ts-ignore
+    lordNibblerTotal -= leela.price;
+    // @ts-ignore
+    leela.price *= 2;
+    // @ts-ignore
+    console.log('cost:', leela.price);
   } else {
     window.alert('Nibbler we need more dark matter!')
   }
@@ -167,10 +161,65 @@ function buyLeela(name) {
 
 
 // SECTION interval auto upgrades
-// need price to subtract from the interval
-// add to quantity
+// need to subtract price from lord nibbler
+// need to add to upgrade qty
+function buyDigest(name) {
+  console.log('buying digestion');
+  let digest = autoUpgrades.find(digest => digest.name == name);
+  let drawQty = document.getElementById('digest-qty');
+  // @ts-ignore
+  if (lordNibblerTotal >= digest.price) {
+    // @ts-ignore
+    digest.quantity++
+    // @ts-ignore
+  } if (digest.quantity >= 1) {
+    // @ts-ignore
+    lordNibblerTotal -= digest.price;
+    // @ts-ignore
+    digest.price *= 2;
+  } else {
+    window.alert('Get more dark matter to help Nibbler digest!')
+  }
+  // NOTE here is the modify function to be made
+}
 
-// NOTE 
+function buyPlanetExpress(name) {
+  console.log('buying planet express');
+  let planet = autoUpgrades.find(planet => planet.name == name);
+  let drawQty = document.getElementById('planet-qty');
+  // @ts-ignore
+  if (lordNibblerTotal >= planet.price) {
+    // @ts-ignore
+    planet.quantity++
+    // @ts-ignore
+  } if (planet.quantity >= 1) {
+    // @ts-ignore
+    lordNibblerTotal -= planet.price;
+    // @ts-ignore
+    planet.price *= 2;
+  } else {
+    window.alert('Good News! You need more dark matter.')
+  }
+  // NOTE here is the modify function to be made
+}
+
+function autoModifyDigest(name) {
+  let auto = autoUpgrades.find(a => a.name == name);
+  let priceAuto = document.getElementById('digest-price')
+}
+
+
+
+
+
+
+
+
+
+
+// switch statment for interval??
+
+// NOTE
 // function drawDarkInterval() {
 //   let autoUpgrade = autoUpgrades.find(auto => auto.name);
 
@@ -180,8 +229,6 @@ function buyLeela(name) {
 
 //   let digestQty = document.getElementById('digest-qty');
 //   let planetQty = document.getElementById('planet-qty');
-
-
 
 //   // @ts-ignore
 //   clickDigest.innerText = darkMatterAuto;
@@ -194,80 +241,22 @@ function buyLeela(name) {
 // }
 
 
-// darkMatterAuto
-function stopIntervalDigest() {
-  // let darkMatterAuto = 0;
 
-  console.log('dont start interval digest');
-  let autoUpgrade = autoUpgrades.find(auto => auto.name);
+// FIXME move interval to run when the page loads
+// It can run all the time, and the logic to add or not add can be handled by the quantity of the upgrade
 
-  let digestQty = document.getElementById('digest-qty');
-  let clickDigest = document.getElementById('digest-total')
+// // SECTION intervals
+// let digestionInterval = setInterval(() => {
+//   console.log("digestion interval set");
+//   // @ts-ignore
+//   lordNibblerTotal += 2;
+// }, 3000)
 
-  let digestionInterval = setInterval(() => {
-    console.log("digestion interval set");
-    // @ts-ignore
-    lordNibblerTotal += 2;
-  }, 3000)
+// let planetExpressInterval = setInterval(() => {
+//   console.log("planet express interval set");
+//   // @ts-ignore
+//   lordNibblerTotal += 10;
+// }, 3000)
 
-  // @ts-ignore
-  if (lordNibblerTotal < autoUpgrade.price) {
-    clearInterval(digestionInterval);
-  } else {
-    // @ts-ignore
-    lordNibblerTotal -= autoUpgrade.price;
-    // @ts-ignore
-    darkMatterAuto += autoUpgrade.multiplier;
-    // @ts-ignore
-    autoUpgrade.quantity++
-    // @ts-ignore
-    console.log('digest', autoUpgrade.quantity);
-  }
-  // @ts-ignore
-  digestQty.innerText = autoUpgrade.quantity;
-  // @ts-ignore
-  clickDigest.innerText = darkMatterAuto;
-  // drawDarkInterval()
-  updateBlackMatter()
-}
 
-function upgradeDigest() {
-
-}
-
-function stopIntervalPlanet() {
-  // let darkMatterAuto = 0;
-
-  console.log('do not start interval planet');
-  let autoUpgrade = autoUpgrades.find(auto => auto.name);
-  let planetQty = document.getElementById('planet-qty');
-  let clickPlanet = document.getElementById('planet-total');
-
-  let planetInterval = setInterval(() => {
-    console.log("digestion interval set");
-    // @ts-ignore
-    lordNibblerTotal += 10;
-  }, 3000)
-
-  // @ts-ignore
-  if (lordNibblerTotal < autoUpgrade.price) {
-    clearInterval(planetInterval);
-  } else {
-    // @ts-ignore
-    lordNibblerTotal -= autoUpgrade.price;
-    // @ts-ignore
-    darkMatterAuto += autoUpgrade.multiplier;
-    // @ts-ignore
-    autoUpgrade.quantity++
-  }
-  // @ts-ignore
-  planetQty.innerText = autoUpgrade.quantity;
-  // @ts-ignore
-  clickPlanet.innerText = darkMatterAuto;
-  // drawDarkInterval()
-  updateBlackMatter()
-}
-
-stopIntervalDigest()
-stopIntervalPlanet()
 
